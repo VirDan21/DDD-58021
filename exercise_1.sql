@@ -5,4 +5,4 @@ insert into exercise_1.emp_1 (EMP_NUM, EMP_Lname, EMP_FNAME, EMP_INITIAL, EMP_HI
 VALUES ('333', 'Buan', 'Richard', 'N', '2003-12-21', 502);
 insert into exercise_1.emp_1 (EMP_NUM, EMP_Lname, EMP_FNAME, EMP_INITIAL, EMP_HIREDATE, JOB_CODE)
 VALUES ('323', 'Vilalon', 'Ryanne', 'M', '2003-10-21', 503);
-select * from exercise_1.emp_1 where JOB_CODE = '502';
+select JOB_CODE = '502' from exercise_1.emp_1;
