@@ -15,4 +15,4 @@ values('Gina de Leon', 'Apalit', 'Pampanga'),
 select * from customer;
 select * from customer where City = 'Bulacan';
 select * from customer where City = 'Laguna' and Municipality = 'Alaminos';
-select * from customer where not City = 'Pampanga';
+select * from customer where not City = 'Pampanga' order by City,Municipality;
