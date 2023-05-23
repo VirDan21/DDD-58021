@@ -1,6 +1,4 @@
-from email.mime import image
-from tkinter import DISABLED, RIGHT, VERTICAL, Y, messagebox, ttk
-from turtle import width
+from tkinter import messagebox, ttk
 from PIL import ImageTk,Image
 import mysql.connector
 import pandas as pd
@@ -21,37 +19,42 @@ def open_new_window():
     def destroy_window():
         new_window.destroy()
         root.deiconify()
+    
     new_window = tk.Toplevel(root)
     new_window.title("myPhone")
     new_window.geometry("750x750")
     new_window.maxsize(750, 750)
-    cursor.execute("SELECT fname,contact_number,position,office,local_line,email_add FROM users")
+
+    btn_logout = tk.Button(new_window, text = "Sign Out", command = destroy_window, bg = '#CED4DA', font = ("Yu Gothic UI SEMIBOLD",15))
+    btn_logout.place(x = 225, y = 600, width = 200)
+
+    cursor.execute("SELECT fname, contact_number, position, office, local_line, email_add FROM users")
     result = cursor.fetchall()
 
     scrollbar = tk.Scrollbar(root)
     scrollbar.place(x=730, y=0, height=750)
 
     # Create a treeview
-    treeview = ttk.Treeview(new_window, yscrollcommand=scrollbar.set)
+    treeview = ttk.Treeview(new_window, yscrollcommand=scrollbar.set, show = 'headings')
 
     # Define the columns
-    treeview["columns"] = ("#0", "#1", "#2", "#3", "#4", "#5")
+    treeview["columns"] = ("#1", "#2", "#3", "#4", "#5", "#6")
 
     # Format column headers
-    treeview.heading("#0", text = "Fname")
-    treeview.heading("#1", text = "Contact#")
-    treeview.heading("#2", text = "Position")
-    treeview.heading("#3", text = "Office")
-    treeview.heading("#4", text = "Local_line")
-    treeview.heading("#5", text = "Email_add")
+    treeview.heading("#1", text = "Fname")
+    treeview.heading("#2", text = "Contact#")
+    treeview.heading("#3", text = "Position")
+    treeview.heading("#4", text = "Office")
+    treeview.heading("#5", text = "Local_line")
+    treeview.heading("#6", text = "Email_add")
 
     # Configure column widths
-    treeview.column("#0", width = 50)
-    treeview.column("#1", width = 50)
-    treeview.column("#2", width = 50)
-    treeview.column("#3", width = 50)
-    treeview.column("#4", width = 50)
-    treeview.column("#5", width = 50)
+    treeview.column("#1", width = 100, anchor ='c')
+    treeview.column("#2", width = 25, anchor ='c')
+    treeview.column("#3", width = 50, anchor ='c')
+    treeview.column("#4", width = 50, anchor ='c')
+    treeview.column("#5", width = 15, anchor ='c')
+    treeview.column("#6", width = 75, anchor ='c')
 
     # Bind the treeview to the scrollbar
     scrollbar.config(command=treeview.yview)
@@ -65,9 +68,6 @@ def open_new_window():
 
     
     new_window.mainloop()
-
-    btn_logout = tk.Button(new_window, text = "Sign Out", command = destroy_window, bg = '#CED4DA', font = ("Yu Gothic UI SEMIBOLD",15))
-    btn_logout.place(x = 225, y = 600, width = 200)
 
 # function to open a new window for the admin
 def open_new_window1():
@@ -83,36 +83,39 @@ def open_new_window1():
     btn_register = tk.Button(new_window1, text = "Register", command = register, bg = '#CED4DA', font = ("Yu Gothic UI SEMIBOLD",15))
     btn_register.place(x = 225, y = 550, width = 200)
 
+    btn_delete = tk.Button(new_window1, text = "Delete", command = delete, bg = '#CED4DA', font = ("Yu Gothic UI SEMIBOLD",15))
+    btn_delete.place(x = 225, y = 600, width = 200)
+
     btn_logout = tk.Button(new_window1, text = "Sign Out", command = signout, bg = '#CED4DA', font = ("Yu Gothic UI SEMIBOLD",15))
-    btn_logout.place(x = 225, y = 600, width = 200)
+    btn_logout.place(x = 225, y = 650, width = 200)
     
-    cursor.execute("SELECT fname,contact_number,position,office,local_line,email_add FROM users")
+    cursor.execute("SELECT fname, contact_number, position, office, local_line, email_add FROM users")
     result = cursor.fetchall()
 
     scrollbar = tk.Scrollbar(root)
     scrollbar.place(x=730, y=0, height=750)
 
     # Create a treeview
-    treeview = ttk.Treeview(new_window1, yscrollcommand=scrollbar.set)
+    treeview = ttk.Treeview(new_window1, yscrollcommand=scrollbar.set, show = 'headings')
 
     # Define the columns
-    treeview["columns"] = ("#0", "#1", "#2", "#3", "#4", "#5")
+    treeview["columns"] = ("#1", "#2", "#3", "#4", "#5", "#6")
 
     # Format column headers
-    treeview.heading("#0", text = "Fname")
-    treeview.heading("#1", text = "Contact#")
-    treeview.heading("#2", text = "Position")
-    treeview.heading("#3", text = "Office")
-    treeview.heading("#4", text = "Local_line")
-    treeview.heading("#5", text = "Email_add")
+    treeview.heading("#1", text = "Fname")
+    treeview.heading("#2", text = "Contact#")
+    treeview.heading("#3", text = "Position")
+    treeview.heading("#4", text = "Office")
+    treeview.heading("#5", text = "Local_line")
+    treeview.heading("#6", text = "Email_add")
 
     # Configure column widths
-    treeview.column("#0", width = 50)
-    treeview.column("#1", width = 50)
-    treeview.column("#2", width = 50)
-    treeview.column("#3", width = 50)
-    treeview.column("#4", width = 50)
-    treeview.column("#5", width = 50)
+    treeview.column("#1", width = 100, anchor ='c')
+    treeview.column("#2", width = 25, anchor ='c')
+    treeview.column("#3", width = 50, anchor ='c')
+    treeview.column("#4", width = 50, anchor ='c')
+    treeview.column("#5", width = 15, anchor ='c')
+    treeview.column("#6", width = 75, anchor ='c')
 
     # Bind the treeview to the scrollbar
     scrollbar.config(command=treeview.yview)
@@ -129,6 +132,7 @@ def open_new_window1():
 
 # forgot function
 def forgot(*args):
+    root.withdraw()
     def forgot_password():
         username = entry_username.get()
         pw = entry_password.get()
@@ -142,23 +146,27 @@ def forgot(*args):
         db.commit()
         messagebox.showinfo("Success", "Reset successful!")
         forgot_window.destroy()
+        root.deiconify()
 
     # registration window
     forgot_window = tk.Toplevel(root)
+    forgot_window.geometry("750x750")
+    forgot_window.maxsize(750, 750)
     forgot_window.title("Forgot Password")
 
-    label_username = tk.Label(forgot_window, text="Username:")
-    label_username.pack()
-    entry_username = tk.Entry(forgot_window)
-    entry_username.pack()
+    label_username = tk.Label(forgot_window, text="Username:", bg = '#CED4DA', font = ("Yu Gothic UI",15))
+    label_username.place(x=450,y=0)
+    entry_username = tk.Entry(forgot_window, font = ("Yu Gothic UI",15))
+    entry_username.place(x=450,y=650)
 
     label_password = tk.Label(forgot_window, text="Password:")
-    label_password.pack()
+    label_password.place(x=450,y=650)
     entry_password = tk.Entry(forgot_window, show="*")
-    entry_password.pack()
+    entry_password.place(x=450,y=650)
 
-    btn_reset = tk.Button(forgot_window, text="reset", command=forgot_password)
-    btn_reset.pack()
+    forgot_window.bind('<Return>', forgot_password)
+    btn_reset = tk.Button(forgot_window, text="reset", command=forgot_password, bg = '#CED4DA', font = ("Yu Gothic UI",15))
+    btn_reset.place(x=450,y=650)
 
 # register function
 def register(*args):
@@ -177,14 +185,14 @@ def register(*args):
             return
 
         # checker if inputted user exists
-        cursor.execute("SELECT * FROM users WHERE username = %s and email_add = %s", (username, email_add))
+        cursor.execute("SELECT * FROM users WHERE email_add = %s or username = %s", (username, email_add))
         result = cursor.fetchone()
 
         if result:
             messagebox.showerror("Error", "User or Email Address is the same.")
             return
 
-        # update data
+        # register data
         cursor.execute("INSERT INTO users (email_add, username, pw, fname, position, contact_number, office, local_line) VALUES (%s, %s, %s, %s, %s, %s, %s, %s)", (email_add, username, pw, fname, position, contact_number, office, local_line)) 
         db.commit()
         messagebox.showinfo("Success", "Registration successful!")
@@ -238,7 +246,7 @@ def register(*args):
     btn_register = tk.Button(register_window, text = "Register", command = register_user)
     btn_register.pack()
 
-    register_window.bind('<Return>',register)
+    register_window.bind('<Return>',register_user)
 
 # login function
 def login(*args):
@@ -254,7 +262,7 @@ def login(*args):
         open_new_window1()
 
     # if user and pw == sql user and pw
-    cursor.execute("SELECT * FROM users WHERE username = %s AND password = %s", (username, pw))
+    cursor.execute("SELECT * FROM users WHERE username = %s AND pw = %s", (username, pw))
     result = cursor.fetchone()
 
     if result:
@@ -262,8 +270,49 @@ def login(*args):
         open_new_window()
     else:
         messagebox.showerror("Error", "Invalid username or password.")
-     
+  
+# delete function
+def delete():
+    def delete_user():
+        email_add = entry_email_add1.get()
+        username = entry_username.get()
 
+        if username == "" or email_add == "":
+                messagebox.showerror("Error", "Please enter a username and password.")
+                return
+
+        # checker if inputted user exists
+        cursor.execute("SELECT * FROM users WHERE email_add = %s or username = %s", (email_add, username))
+        result = cursor.fetchone()
+
+        if result:
+            messagebox.showerror("Error", "User or Email Address does not exist.")
+            return
+
+        # delete data
+        cursor.execute("DELETE FROM users WHERE email_add = %s or username = %s", (email_add, username))
+        db.commit()
+        messagebox.showinfo("Success", "Delete successful!")
+        delete_window.destroy()
+
+    delete_window=tk.Toplevel(root)
+    delete_window.title("Delete")
+
+    label_email = tk.Label(delete_window, text = "Email Address:")
+    label_email.pack()
+    entry_email_add1 = tk.Entry(delete_window)
+    entry_email_add1.pack()
+
+    label_username = tk.Label(delete_window, text = "Username:")
+    label_username.pack()
+    entry_username = tk.Entry(delete_window)
+    entry_username.pack()
+
+    btn_delete = tk.Button(delete_window, text = "Delete", command = delete_user)
+    btn_delete.pack()
+    delete_window.bind('<Return>',delete_user)
+
+# privacy window
 def privacy(*args):
     def destroy_privacywindow():
         privacy_window.destroy()
